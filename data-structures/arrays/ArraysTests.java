@@ -324,4 +324,54 @@ public class ArraysTests {
         assertArrayEquals("'mr john smith' should become 'mr%20john%20smith'",
                 "mr%20john%20smith".toCharArray(), problems.urlify(chars, 13));
     }
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //             zeroMatrix
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    @Test(timeout = TIMEOUT)
+    public void testZeroMatrixOneZero() {
+        int[][] arr = new int[][]{ { 1, 2, 3 }, { 4, 5, 6 }, { 7, 0, 9 } },
+                expected = new int[][]{ { 1, 0, 3 }, { 4, 0, 6 }, { 0, 0, 0 } };
+
+        problems.zeroMatrix(arr);
+
+        assertArrayEquals("Array should match expected array", expected, arr);
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void testZeroMatrixZerosFirstRowColumn() {
+        int[][] arr = new int[][]{ { 0, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }, { 10, 11, 12 } },
+                expected = new int[][]{ { 0, 0, 0 }, { 0, 5, 6 }, { 0, 8, 9 }, { 0, 11, 12 } };
+
+        problems.zeroMatrix(arr);
+
+        assertArrayEquals("Array should match expected array", expected, arr);
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void testZeroMatrixZerosMultipleZeros() {
+        int[][] arr = new int[][]{ { 1, 2, 3, 4, 5 }, { 6, 0, 8, 9, 10 }, { 11, 12, 13, 0, 15 } },
+                expected = new int[][]{ { 1, 0, 3, 0, 5 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };
+
+        problems.zeroMatrix(arr);
+
+        assertArrayEquals("Array should match expected array", expected, arr);
+    }
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //         isStringRotation
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    @Test(timeout = TIMEOUT)
+    public void testIsStringRotationFalse() {
+        assertFalse("'banana' is not a rotation of 'monkey'",
+                problems.isStringRotation("banana", "monkey"));
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void testIsStringRotationTrue() {
+        assertTrue("'elyhipposlov' is a rotation of 'lovelyhippos",
+                problems.isStringRotation("lovelyhippos", "elyhipposlov"));
+    }
 }

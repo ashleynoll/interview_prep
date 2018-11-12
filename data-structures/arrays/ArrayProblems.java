@@ -404,4 +404,89 @@ public class ArrayProblems {
         }
         return characters;
     }
+
+    /**
+     *
+     * Problem:
+     *
+     * Write an algorithm such that if an element in an MxN matrix is 0, its entire row
+     * and column are set to 0.
+     *
+     * Solution Explanation :
+     *
+     * Seems simple except blindly zeroing out columns and rows as encountered
+     * will result in the entire matrix being set to zero. To avoid this, go through
+     * and set the first element in the corresponding row/column to zero to mark
+     * that it should be zero-ed out. While iterating, check if there are any 0s
+     * already existing in the first row or column. If not, this should not be
+     * zero-ed out at the end. After the initial pass, go through once more to
+     * zero out anything that has a zero for the first element of its column or
+     * row. If the first row had a zero, go back and zero i out as well. Same
+     * goes for columns.
+     */
+    public void zeroMatrix(int[][] arr) {
+        if (arr.length == 0) {
+            return;
+        }
+        boolean firstRowHasZero = false,
+                firstColHasZero = false;
+        // Find all zeros and zero out the first element in the corresponding row/col
+        for (int row = 0; row < arr.length; row++) {
+            for (int col = 0; col < arr[row].length; col++) {
+                if (arr[row][col] == 0) {
+                    if (row == 0) {
+                        firstRowHasZero = true;
+                    }
+                    if (col == 0) {
+                        firstColHasZero = true;
+                    }
+                    arr[0][col] = 0;
+                    arr[row][0] = 0;
+                }
+            }
+        }
+
+        // Go through and zero all that start with a zero
+        for (int row = 1; row < arr.length; row++) {
+            for (int col = 1; col < arr[row].length; col++) {
+                if (arr[row][0] == 0 || arr[0][col] == 0) {
+                    arr[row][col] = 0;
+                }
+            }
+        }
+
+        // Zero out the first row and column if needed
+        for (int i = 0; firstRowHasZero && i < arr[0].length; i++) {
+            arr[0][i] = 0;
+        }
+
+        for (int i = 0; firstColHasZero && i < arr.length; i++) {
+            arr[i][0] = 0;
+        }
+    }
+
+    /**
+     *
+     * Problem:
+     *
+     * Assume you hav a method isSubstring which checks if one word is a substring
+     * of another. Given two strings, s1 and s2, write code to check if s2 is a
+     * rotation of s1 using only one call to isSubstring (e.g. "waterbottle" is
+     * a rotation of "erbottlewat")
+     *
+     * Solution Explanation:
+     *
+     * The key to this problem is realizing that we can split the word into parts
+     * x and y such that the first string is xy and the second string is yx.
+     * Thus, yx will always be a substring of xyxy.
+     *
+     */
+    public boolean isStringRotation(String s1, String s2) {
+        return s1.length() == s2.length() && isSubstring(s1 + s1, s2);
+    }
+
+    // Checks if s2 is a substring of s1
+    private boolean isSubstring(String s1, String s2) {
+        return s1.contains(s2);
+    }
 }
