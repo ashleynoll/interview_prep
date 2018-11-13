@@ -3,9 +3,9 @@ import java.util.NoSuchElementException;
 /**
  * Implementation of a Singly Linked List
  */
-public class SinglyLinkedList<T> implements LinkedListInterface<T> {
-    private LinkedListNode<T> head;
-    private LinkedListNode<T> tail;
+public class SinglyLinkedList<T> implements SinglyLinkedListInterface<T> {
+    private SinglyLinkedListNode<T> head;
+    private SinglyLinkedListNode<T> tail;
     private int size;
 
     @Override
@@ -17,15 +17,15 @@ public class SinglyLinkedList<T> implements LinkedListInterface<T> {
                     "the size of the list or negative.");
         }
 
-        LinkedListNode<T> temp = head;
+        SinglyLinkedListNode<T> temp = head;
         if (index == 0) {
-            head = new LinkedListNode<>(data, head);
+            head = new SinglyLinkedListNode<>(data, head);
             temp = head;
         } else {
             for (int i = 1; i < index; i++) {
                 temp = temp.getNext();
             }
-            temp.setNext(new LinkedListNode<>(data, temp.getNext()));
+            temp.setNext(new SinglyLinkedListNode<>(data, temp.getNext()));
             temp = temp.getNext();
         }
 
@@ -52,7 +52,7 @@ public class SinglyLinkedList<T> implements LinkedListInterface<T> {
                     "the size of the list or a negative index.");
         }
         T data;
-        LinkedListNode<T> temp = head;
+        SinglyLinkedListNode<T> temp = head;
         if (index == 0) {
             data = head.getData();
             head = head.getNext();
@@ -88,7 +88,7 @@ public class SinglyLinkedList<T> implements LinkedListInterface<T> {
             throw new NoSuchElementException("The provided data was not found " +
                     "in the list as it is empty.");
         }
-        LinkedListNode<T> temp = head;
+        SinglyLinkedListNode<T> temp = head;
         int index = 0;
         T ret;
         if (head.getData().equals(data)) {
@@ -124,7 +124,7 @@ public class SinglyLinkedList<T> implements LinkedListInterface<T> {
         if (index == size - 1) {
             return tail.getData();
         }
-        LinkedListNode<T> temp = head;
+        SinglyLinkedListNode<T> temp = head;
         for (int i = 0; i < index; i++) {
             temp = temp.getNext();
         }
@@ -134,7 +134,7 @@ public class SinglyLinkedList<T> implements LinkedListInterface<T> {
     @Override
     public Object[] toArray() {
         Object[] ret = new Object[size];
-        LinkedListNode<T> temp = head;
+        SinglyLinkedListNode<T> temp = head;
         for (int i = 0; i < size; i++) {
             ret[i] = temp.getData();
             temp = temp.getNext();
@@ -160,12 +160,12 @@ public class SinglyLinkedList<T> implements LinkedListInterface<T> {
     }
 
     @Override
-    public LinkedListNode<T> getHead() {
+    public SinglyLinkedListNode<T> getHead() {
         return head;
     }
 
     @Override
-    public LinkedListNode<T> getTail() {
+    public SinglyLinkedListNode<T> getTail() {
         return tail;
     }
 }

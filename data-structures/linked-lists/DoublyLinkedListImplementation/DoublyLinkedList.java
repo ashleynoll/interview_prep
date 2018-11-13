@@ -1,9 +1,9 @@
 /**
  * Implementation of a DoublyLinkedList
  */
-public class DoublyLinkedList<T> implements LinkedListInterface<T> {
-    private LinkedListNode<T> head;
-    private LinkedListNode<T> tail;
+public class DoublyLinkedList<T> implements DoublyLinkedListInterface<T> {
+    private DoublyLinkedListNode<T> head;
+    private DoublyLinkedListNode<T> tail;
     private int size;
 
     @Override
@@ -17,16 +17,16 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
         }
 
         if (size == 0) {
-            head = new LinkedListNode<T>(data);
+            head = new DoublyLinkedListNode<T>(data);
         } else if (index == 0) {
-            head = new LinkedListNode<>(data, null, head);
+            head = new DoublyLinkedListNode<T>(data, null, head);
             head.getNext().setPrevious(head);
         } else if (index == size) {
-            tail.setNext(new LinkedListNode<>(data, tail, null));
+            tail.setNext(new DoublyLinkedListNode<>(data, tail, null));
             tail = tail.getNext();
         } else {
-            LinkedListNode<T> temp = getNodeAtIndex(index);
-            temp.setPrevious(new LinkedListNode<>(data, temp.getPrevious(), temp));
+            DoublyLinkedListNode<T> temp = getNodeAtIndex(index);
+            temp.setPrevious(new DoublyLinkedListNode<>(data, temp.getPrevious(), temp));
             temp.getPrevious().getPrevious().setNext(temp.getPrevious());
         }
 
@@ -66,7 +66,7 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
             tail = tail.getPrevious();
             tail.setNext(null);
         } else {
-            LinkedListNode<T> temp = getNodeAtIndex(index);
+            DoublyLinkedListNode<T> temp = getNodeAtIndex(index);
             temp.getPrevious().setNext(temp.getNext());
             temp.getNext().setPrevious(temp.getPrevious());
             data = temp.getData();
@@ -98,7 +98,7 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
             return false;
         }
 
-        LinkedListNode<T> temp = head;
+        DoublyLinkedListNode<T> temp = head;
         for (int i = 0; i < size && !temp.getData().equals(data); i++) {
             temp = temp.getNext();
         }
@@ -132,7 +132,7 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
     @Override
     public Object[] toArray() {
         Object[] ret = new Object[size];
-        LinkedListNode<T> temp = head;
+        DoublyLinkedListNode<T> temp = head;
         for (int i = 0; i < size; i++) {
             ret[i] = temp.getData();
             temp = temp.getNext();
@@ -158,17 +158,17 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
     }
 
     @Override
-    public LinkedListNode<T> getHead() {
+    public DoublyLinkedListNode<T> getHead() {
         return head;
     }
 
     @Override
-    public LinkedListNode<T> getTail() {
+    public DoublyLinkedListNode<T> getTail() {
         return tail;
     }
 
-    private LinkedListNode<T> getNodeAtIndex(int index) {
-        LinkedListNode<T> temp;
+    private DoublyLinkedListNode<T> getNodeAtIndex(int index) {
+        DoublyLinkedListNode<T> temp;
         if (index <= size / 2 ) {
             temp = head;
             for (int i = 0; i < index; i++) {

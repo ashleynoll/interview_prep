@@ -1,10 +1,10 @@
 /**
  * Node class used for implementing DoublyLinkedList.
  */
-public class LinkedListNode<T> {
+public class DoublyLinkedListNode<T> {
     private T data;
-    private LinkedListNode<T> previous;
-    private LinkedListNode<T> next;
+    private DoublyLinkedListNode<T> previous;
+    private DoublyLinkedListNode<T> next;
 
     /**
      * Creates a new LinkedListNode with the given T object and node references.
@@ -13,8 +13,8 @@ public class LinkedListNode<T> {
      * @param previous The previous node in the list.
      * @param next The next node in the list.
      */
-    public LinkedListNode(T data, LinkedListNode<T> previous,
-            LinkedListNode<T> next) {
+    public DoublyLinkedListNode(T data, DoublyLinkedListNode<T> previous,
+                                DoublyLinkedListNode<T> next) {
         this.data = data;
         this.previous = previous;
         this.next = next;
@@ -25,7 +25,7 @@ public class LinkedListNode<T> {
      *
      * @param data The data stored in the new node.
      */
-    public LinkedListNode(T data) {
+    public DoublyLinkedListNode(T data) {
         this(data, null, null);
     }
 
@@ -43,7 +43,7 @@ public class LinkedListNode<T> {
      *
      * @return The next node.
      */
-    public LinkedListNode<T> getNext() {
+    public DoublyLinkedListNode<T> getNext() {
         return next;
     }
 
@@ -52,7 +52,7 @@ public class LinkedListNode<T> {
      *
      * @param next The new next node.
      */
-    public void setNext(LinkedListNode<T> next) {
+    public void setNext(DoublyLinkedListNode<T> next) {
         this.next = next;
     }
 
@@ -61,7 +61,7 @@ public class LinkedListNode<T> {
      *
      * @return The previous node.
      */
-    public LinkedListNode<T> getPrevious() {
+    public DoublyLinkedListNode<T> getPrevious() {
         return previous;
     }
 
@@ -70,7 +70,7 @@ public class LinkedListNode<T> {
      *
      * @param previous The new previous node.
      */
-    public void setPrevious(LinkedListNode<T> previous) {
+    public void setPrevious(DoublyLinkedListNode<T> previous) {
         this.previous = previous;
     }
 

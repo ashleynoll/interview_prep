@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class LinkedListTests {
+public class SinglyLinkedListTests {
 
     private static final long TIMEOUT = 200;
 
@@ -26,7 +26,7 @@ public class LinkedListTests {
      * to {@code expected}.
      */
     private void checkList() {
-        LinkedListNode<NewInteger> current = actual.getHead();
+        SinglyLinkedListNode<NewInteger> current = actual.getHead();
         for (int i = 0; i < expected.length; i++) {
             assertNotNull(current);
             assertEquals(expected[i], current.getData());
@@ -54,7 +54,7 @@ public class LinkedListTests {
      * @param tail the new tail
      * @param size the new size
      */
-    private void setLinkedList(SinglyLinkedList<NewInteger> list, LinkedListNode<NewInteger> head, LinkedListNode<NewInteger> tail, int size) {
+    private void setLinkedList(SinglyLinkedList<NewInteger> list, SinglyLinkedListNode<NewInteger> head, SinglyLinkedListNode<NewInteger> tail, int size) {
         try {
             Field field = SinglyLinkedList.class.getDeclaredField("head");
             field.setAccessible(true);
@@ -97,8 +97,8 @@ public class LinkedListTests {
      * ListOne = (-5, 2, 4, -5, 10, 2, -5)
      */
     private void initListOne() {
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(new NewInteger(-5, -5), null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(new NewInteger(-5, -5), new LinkedListNode<>(new NewInteger(2, 2), new LinkedListNode<>(new NewInteger(4, 4), new LinkedListNode<>(new NewInteger(-5, -5), new LinkedListNode<>(new NewInteger(10, 10), new LinkedListNode<>(new NewInteger(2, 2), tail))))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(new NewInteger(-5, -5), null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(new NewInteger(-5, -5), new SinglyLinkedListNode<>(new NewInteger(2, 2), new SinglyLinkedListNode<>(new NewInteger(4, 4), new SinglyLinkedListNode<>(new NewInteger(-5, -5), new SinglyLinkedListNode<>(new NewInteger(10, 10), new SinglyLinkedListNode<>(new NewInteger(2, 2), tail))))));
 
         setLinkedList(actual, head, tail, 7);
 
@@ -109,8 +109,8 @@ public class LinkedListTests {
      * ListTwo = (0, 1, 2, 3, 4)
      */
     private void initListTwo() {
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(new NewInteger(4, 4), null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(new NewInteger(0, 0), new LinkedListNode<>(new NewInteger(1, 1), new LinkedListNode<>(new NewInteger(2, 2), new LinkedListNode<>(new NewInteger(3, 3), tail))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(new NewInteger(4, 4), null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(new NewInteger(0, 0), new SinglyLinkedListNode<>(new NewInteger(1, 1), new SinglyLinkedListNode<>(new NewInteger(2, 2), new SinglyLinkedListNode<>(new NewInteger(3, 3), tail))));
 
         setLinkedList(actual, head, tail, 5);
     }
@@ -254,8 +254,8 @@ public class LinkedListTests {
 
         // Terrible Formatting to Avoid Checkstyle
         // Basically makes a LL of size 5 with NewIntegers from 0 to 4
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(new NewInteger(4, 4), null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(new NewInteger(0, 0), new LinkedListNode<>(new NewInteger(1, 1), new LinkedListNode<>(new NewInteger(2, 2), new LinkedListNode<>(new NewInteger(3, 3), tail))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(new NewInteger(4, 4), null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(new NewInteger(0, 0), new SinglyLinkedListNode<>(new NewInteger(1, 1), new SinglyLinkedListNode<>(new NewInteger(2, 2), new SinglyLinkedListNode<>(new NewInteger(3, 3), tail))));
         setLinkedList(actual, head, tail, 5);
         Object[] result = actual.toArray();
         assertArrayEquals(answer, result);
@@ -278,7 +278,7 @@ public class LinkedListTests {
 
     @Test(timeout = TIMEOUT)
     public void clear2OneElement() {
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(new NewInteger(0, 0), null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(new NewInteger(0, 0), null);
         setLinkedList(actual, head, head, 1);
         actual.clear();
         assertNull(actual.getHead());
@@ -291,8 +291,8 @@ public class LinkedListTests {
     public void clear3General() {
         // Terrible Formatting to Avoid Checkstyle
         // Basically makes a LL of size 5 with NewIntegers from 0 to 4
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(new NewInteger(4, 4), null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(new NewInteger(0, 0), new LinkedListNode<>(new NewInteger(1, 1), new LinkedListNode<>(new NewInteger(2, 2), new LinkedListNode<>(new NewInteger(3, 3), tail))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(new NewInteger(4, 4), null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(new NewInteger(0, 0), new SinglyLinkedListNode<>(new NewInteger(1, 1), new SinglyLinkedListNode<>(new NewInteger(2, 2), new SinglyLinkedListNode<>(new NewInteger(3, 3), tail))));
         setLinkedList(actual, head, tail, 5);
         actual.clear();
         assertNull(actual.getHead());
@@ -314,7 +314,7 @@ public class LinkedListTests {
     // 1 point
     @Test(timeout = TIMEOUT)
     public void isEmpty2FalseSingleElement() {
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(new NewInteger(0, 0), null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(new NewInteger(0, 0), null);
         setLinkedList(actual, head, head, 1);
         assertFalse(actual.isEmpty());
 
@@ -328,8 +328,8 @@ public class LinkedListTests {
     public void isEmpty3FalseMultiple() {
         // Terrible Formatting to Avoid Checkstyle
         // Basically makes a LL of size 5 with NewIntegers from 0 to 4
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(new NewInteger(4, 4), null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(new NewInteger(0, 0), new LinkedListNode<>(new NewInteger(1, 1), new LinkedListNode<>(new NewInteger(2, 2), new LinkedListNode<>(new NewInteger(3, 3), tail))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(new NewInteger(4, 4), null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(new NewInteger(0, 0), new SinglyLinkedListNode<>(new NewInteger(1, 1), new SinglyLinkedListNode<>(new NewInteger(2, 2), new SinglyLinkedListNode<>(new NewInteger(3, 3), tail))));
         setLinkedList(actual, head, tail, 5);
         assertFalse(actual.isEmpty());
 
@@ -344,8 +344,8 @@ public class LinkedListTests {
 
         // -5, 2, 4, -5, 10, 2, -5
         NewInteger removed = new NewInteger(10, 10);
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(new NewInteger(-5, -5), null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(new NewInteger(-5, -5), new LinkedListNode<>(new NewInteger(2, 2), new LinkedListNode<>(new NewInteger(4, 4), new LinkedListNode<>(new NewInteger(-5, -5), new LinkedListNode<>(removed, new LinkedListNode<>(new NewInteger(2, 2), tail))))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(new NewInteger(-5, -5), null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(new NewInteger(-5, -5), new SinglyLinkedListNode<>(new NewInteger(2, 2), new SinglyLinkedListNode<>(new NewInteger(4, 4), new SinglyLinkedListNode<>(new NewInteger(-5, -5), new SinglyLinkedListNode<>(removed, new SinglyLinkedListNode<>(new NewInteger(2, 2), tail))))));
 
         setLinkedList(actual, head, tail, 7);
 
@@ -365,8 +365,8 @@ public class LinkedListTests {
         NewInteger three = new NewInteger(3, 3);
         NewInteger four = new NewInteger(4, 4);
 
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(four, null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(zero, new LinkedListNode<>(one, new LinkedListNode<>(two, new LinkedListNode<>(three, tail))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(four, null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(zero, new SinglyLinkedListNode<>(one, new SinglyLinkedListNode<>(two, new SinglyLinkedListNode<>(three, tail))));
 
         setLinkedList(actual, head, tail, 5);
 
@@ -427,8 +427,8 @@ public class LinkedListTests {
         NewInteger three = new NewInteger(3, 3);
         NewInteger four = new NewInteger(4, 4);
 
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(four, null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(zero, new LinkedListNode<>(one, new LinkedListNode<>(two, new LinkedListNode<>(three, tail))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(four, null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(zero, new SinglyLinkedListNode<>(one, new SinglyLinkedListNode<>(two, new SinglyLinkedListNode<>(three, tail))));
 
         setLinkedList(actual, head, tail, 5);
 
@@ -446,8 +446,8 @@ public class LinkedListTests {
         NewInteger three = new NewInteger(3, 3);
         NewInteger four = new NewInteger(4, 4);
 
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(four, null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(zero, new LinkedListNode<>(one, new LinkedListNode<>(two, new LinkedListNode<>(three, tail))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(four, null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(zero, new SinglyLinkedListNode<>(one, new SinglyLinkedListNode<>(two, new SinglyLinkedListNode<>(three, tail))));
 
         setLinkedList(actual, head, tail, 5);
 
@@ -493,8 +493,8 @@ public class LinkedListTests {
         NewInteger three = new NewInteger(3, 3);
         NewInteger four = new NewInteger(4, 4);
 
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(four, null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(zero, new LinkedListNode<>(one, new LinkedListNode<>(two, new LinkedListNode<>(three, tail))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(four, null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(zero, new SinglyLinkedListNode<>(one, new SinglyLinkedListNode<>(two, new SinglyLinkedListNode<>(three, tail))));
 
         setLinkedList(actual, head, tail, 5);
 
@@ -512,8 +512,8 @@ public class LinkedListTests {
         NewInteger three = new NewInteger(3, 3);
         NewInteger four = new NewInteger(4, 4);
 
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(four, null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(zero, new LinkedListNode<>(one, new LinkedListNode<>(two, new LinkedListNode<>(three, tail))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(four, null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(zero, new SinglyLinkedListNode<>(one, new SinglyLinkedListNode<>(two, new SinglyLinkedListNode<>(three, tail))));
 
         setLinkedList(actual, head, tail, 5);
 
@@ -544,8 +544,8 @@ public class LinkedListTests {
 
         // List = (-5, 2, 4, -5, 10, 2, -5)
         NewInteger removed = new NewInteger(2, 2);
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(new NewInteger(-5, -5), null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(new NewInteger(-5, -5), new LinkedListNode<>(removed, new LinkedListNode<>(new NewInteger(4, 4), new LinkedListNode<>(new NewInteger(-5, -5), new LinkedListNode<>(new NewInteger(10, 10), new LinkedListNode<>(new NewInteger(2, 2), tail))))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(new NewInteger(-5, -5), null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(new NewInteger(-5, -5), new SinglyLinkedListNode<>(removed, new SinglyLinkedListNode<>(new NewInteger(4, 4), new SinglyLinkedListNode<>(new NewInteger(-5, -5), new SinglyLinkedListNode<>(new NewInteger(10, 10), new SinglyLinkedListNode<>(new NewInteger(2, 2), tail))))));
 
         setLinkedList(actual, head, tail, 7);
         assertSame(removed, actual.removeFirstOccurrence(new NewInteger(2, 2)));
@@ -562,8 +562,8 @@ public class LinkedListTests {
         NewInteger first = new NewInteger(-5, -5);
         NewInteger middle = new NewInteger(-5, -5);
         NewInteger last = new NewInteger(-5, -5);
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(last, null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(first, new LinkedListNode<>(new NewInteger(2, 2), new LinkedListNode<>(new NewInteger(4, 4), new LinkedListNode<>(middle, new LinkedListNode<>(new NewInteger(10, 10), new LinkedListNode<>(new NewInteger(2, 2), tail))))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(last, null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(first, new SinglyLinkedListNode<>(new NewInteger(2, 2), new SinglyLinkedListNode<>(new NewInteger(4, 4), new SinglyLinkedListNode<>(middle, new SinglyLinkedListNode<>(new NewInteger(10, 10), new SinglyLinkedListNode<>(new NewInteger(2, 2), tail))))));
 
         setLinkedList(actual, head, tail, 7);
 
@@ -606,8 +606,8 @@ public class LinkedListTests {
     public void testGetGeneralMiddle() {
 
         NewInteger toAccess = new NewInteger(2, 2);
-        LinkedListNode<NewInteger> tail = new LinkedListNode<>(new NewInteger(4, 4), null);
-        LinkedListNode<NewInteger> head = new LinkedListNode<>(new NewInteger(0, 0), new LinkedListNode<>(new NewInteger(1, 1), new LinkedListNode<>(toAccess, new LinkedListNode<>(new NewInteger(3, 3), tail))));
+        SinglyLinkedListNode<NewInteger> tail = new SinglyLinkedListNode<>(new NewInteger(4, 4), null);
+        SinglyLinkedListNode<NewInteger> head = new SinglyLinkedListNode<>(new NewInteger(0, 0), new SinglyLinkedListNode<>(new NewInteger(1, 1), new SinglyLinkedListNode<>(toAccess, new SinglyLinkedListNode<>(new NewInteger(3, 3), tail))));
 
         setLinkedList(actual, head, tail, 5);
 

@@ -5,7 +5,7 @@
  * The expected Big-O for each method has been given.
  *
  */
-public interface LinkedListInterface<T> {
+public interface SinglyLinkedListInterface<T> {
 
     /**
      * Adds the element to the index specified.
@@ -142,7 +142,7 @@ public interface LinkedListInterface<T> {
      *
      * @return Node at the head of the linked list.
      */
-    public LinkedListNode<T> getHead();
+    public SinglyLinkedListNode<T> getHead();
 
     /**
      * Returns the tail node of the linked list.
@@ -150,5 +150,5 @@ public interface LinkedListInterface<T> {
      *
      * @return Node at the tail of the linked list.
      */
-    public LinkedListNode<T> getTail();
+    public SinglyLinkedListNode<T> getTail();
 }

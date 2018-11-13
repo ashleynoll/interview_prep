@@ -38,7 +38,7 @@ public class DoublyLinkedListTests {
      * @param size the new size of the student's DLL
      * @param <T>  the type of the DLL
      */
-    private <T> void setDLL(DoublyLinkedList<T> list, LinkedListNode<T> head, LinkedListNode<T> tail, int size) {
+    private <T> void setDLL(DoublyLinkedList<T> list, DoublyLinkedListNode<T> head, DoublyLinkedListNode<T> tail, int size) {
         try {
             Field field = DoublyLinkedList.class.getDeclaredField("head");
             field.setAccessible(true);
@@ -66,14 +66,14 @@ public class DoublyLinkedListTests {
      * @param end      End index, in [0, 12]. Exclusive.
      */
     private void makeDLLRange(String[] nodeData, DoublyLinkedList<String> list, int start, int end) {
-        LinkedListNode<String> head = new LinkedListNode<>(nodeData[start]);
+        DoublyLinkedListNode<String> head = new DoublyLinkedListNode<>(nodeData[start]);
         if (start == end - 1) {
             setDLL(list, head, head, end - start);
         } else {
-            LinkedListNode<String> cur = head;
-            LinkedListNode<String> temp = null;
+            DoublyLinkedListNode<String> cur = head;
+            DoublyLinkedListNode<String> temp = null;
             for (int i = start + 1; i < end; i++) {
-                temp = new LinkedListNode<>(nodeData[i]);
+                temp = new DoublyLinkedListNode<>(nodeData[i]);
                 cur.setNext(temp);
                 temp.setPrevious(cur);
                 cur = cur.getNext();
@@ -97,8 +97,8 @@ public class DoublyLinkedListTests {
             assertNull("Head is not null", actualList.getHead());
             assertNull("Tail is not null", actualList.getTail());
         } else {
-            LinkedListNode<T> expectedNode = expectedList.getHead();
-            LinkedListNode<T> actualNode = actualList.getHead();
+            DoublyLinkedListNode<T> expectedNode = expectedList.getHead();
+            DoublyLinkedListNode<T> actualNode = actualList.getHead();
             for (int i = 0; expectedNode != null; expectedNode = expectedNode.getNext(), actualNode = actualNode.getNext(), i++) {
                 assertEquals("Incorrect element at index " + i, expectedNode.getData(), actualNode.getData());
                 if (expectedNode.getPrevious() == null) {
