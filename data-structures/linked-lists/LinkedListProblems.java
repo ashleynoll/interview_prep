@@ -75,11 +75,11 @@ public class LinkedListProblems {
             return null;
         }
 
-        Node<Integer> temp = head,
-                scanner = head;
+        Node<Integer> temp = head;
 
         while (temp != null) {
-            while (scanner.next != null) {
+            Node<Integer> scanner = temp;
+            while (scanner.next != null) {r
                 if (temp.data.equals(scanner.next.data)) {
                     scanner.next = scanner.next.next;
                 } else {
