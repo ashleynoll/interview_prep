@@ -1,5 +1,7 @@
 # Arrays & Array Lists
 
+This directory also includes problems related to strings as they can be easily modified to be array problems and act similarly with immutability and access.
+
 ## Arrays
 
 ### Strengths
