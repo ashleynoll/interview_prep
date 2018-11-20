@@ -17,7 +17,7 @@ import static org.junit.Assert.assertNull;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class StacksQueuesTests {
+public class StacksQueuesImplementationTests {
 
     private static final int TIMEOUT = 200;
     private static final int INITIAL_CAPACITY = StackInterface.INITIAL_CAPACITY;
