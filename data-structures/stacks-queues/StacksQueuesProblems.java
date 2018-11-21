@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -151,5 +152,97 @@ public class StacksQueuesProblems {
         }
 
         return sorted;
+    }
+
+    /**
+     * Problem:
+     *
+     * An animal shelter, which holds only dogs and cats, operates on a strictly
+     * "first in, first out" basis. People must adopt either the "oldest" (based
+     * on arrival time) of all animals at the shelter, or they can select whether
+     * they would prefer a dog or a cat (and will receive the oldest animal of
+     * that type). They cannot select which specific animal they would like.
+     * Create the data structures to maintain this system and implement operations
+     * such as enqueue, dequeueAny, dequeueDog, and dequeueCat. You may use the built-in
+     * LinkedList data structure
+     *
+     * Solution Explanation:
+     *
+     * To keep track of the animal, it's age, and an id for testing, we will create
+     * an enum to differentiate between dogs and cats and a pet class to hold the
+     * type, id, and relative age. As pets are enqueued to the shelter, they are
+     * added to the back of their respective list and a counter is applied to be their age
+     * and is incremented. When a dog or cat is requested, the pet is pulled from
+     * the front of their list. If any is requested, we will peek at the first
+     * element of both and choose the one with the smaller age which will be the
+     * one added earliest.
+     */
+    public enum Animal {
+        DOG, CAT
+    }
+    public static class Pet {
+        private Animal type;
+        private int id;
+        private int age;
+
+        public Pet(Animal type, int id) {
+            this.type = type;
+            this.id = id;
+        }
+
+        public Animal getType() {
+            return type;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        public int getAge() {
+            return age;
+        }
+    }
+    public static class ShelterQueue {
+        private LinkedList<Pet> catQueue, dogQueue;
+        int count;
+
+        public ShelterQueue() {
+            catQueue = new LinkedList<>();
+            dogQueue = new LinkedList<>();
+        }
+
+        public void enqueue(Pet pet) {
+            if (pet == null) {
+                return;
+            }
+            pet.setAge(count++);
+            if (pet.getType() == Animal.CAT) {
+                catQueue.addLast(pet);
+            } else {
+                dogQueue.addLast(pet);
+            }
+        }
+
+        public Pet dequeueAny() {
+            if (catQueue.isEmpty()) {
+                return dogQueue.removeFirst();
+            } else if (dogQueue.isEmpty()) {
+                return catQueue.removeFirst();
+            }
+            return catQueue.peek().getAge() < dogQueue.peek().getAge()
+                    ? catQueue.removeFirst() : dogQueue.removeFirst();
+        }
+
+        public Pet dequeueDog() {
+            return dogQueue.removeFirst();
+        }
+
+        public Pet dequeueCat() {
+            return catQueue.removeFirst();
+        }
     }
 }

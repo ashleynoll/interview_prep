@@ -77,4 +77,39 @@ public class StacksQueuesTests {
         }
     }
 
+    @Test(timeout = TIMEOUT)
+    public void testShelterQueue() {
+        StacksQueuesProblems.ShelterQueue shelterQueue = new StacksQueuesProblems.ShelterQueue();
+
+        shelterQueue.enqueue(new StacksQueuesProblems.Pet(StacksQueuesProblems.Animal.CAT, 1));
+        shelterQueue.enqueue(new StacksQueuesProblems.Pet(StacksQueuesProblems.Animal.CAT, 2));
+        shelterQueue.enqueue(new StacksQueuesProblems.Pet(StacksQueuesProblems.Animal.DOG, 1));
+        shelterQueue.enqueue(new StacksQueuesProblems.Pet(StacksQueuesProblems.Animal.DOG, 2));
+        shelterQueue.enqueue(new StacksQueuesProblems.Pet(StacksQueuesProblems.Animal.DOG, 3));
+        shelterQueue.enqueue(new StacksQueuesProblems.Pet(StacksQueuesProblems.Animal.CAT, 3));
+
+        StacksQueuesProblems.Pet pet = shelterQueue.dequeueCat();
+        assertEquals("First dequeued cat should be cat 1", 1, pet.getId());
+        assertEquals("First dequeued cat should be cat 1", StacksQueuesProblems.Animal.CAT, pet.getType());
+
+        pet = shelterQueue.dequeueAny();
+        assertEquals("First dequeued any should be cat 2", 2, pet.getId());
+        assertEquals("First dequeued any should be cat 2", StacksQueuesProblems.Animal.CAT, pet.getType());
+
+        pet = shelterQueue.dequeueAny();
+        assertEquals("Second dequeued any should be dog 1", 1, pet.getId());
+        assertEquals("Second dequeued any should be dog 1", StacksQueuesProblems.Animal.DOG, pet.getType());
+
+        pet = shelterQueue.dequeueDog();
+        assertEquals("First dequeued dog should be dog 2", 2, pet.getId());
+        assertEquals("First dequeued dog should be dog 2", StacksQueuesProblems.Animal.DOG, pet.getType());
+
+        pet = shelterQueue.dequeueAny();
+        assertEquals("Third dequeued any should be dog 3", 3, pet.getId());
+        assertEquals("Third dequeued any should be dog 3", StacksQueuesProblems.Animal.DOG, pet.getType());
+
+        pet = shelterQueue.dequeueAny();
+        assertEquals("Fourth dequeued any should be cat 3", 3, pet.getId());
+        assertEquals("Fourth dequeued any should be cat 3", StacksQueuesProblems.Animal.CAT, pet.getType());
+    }
 }
