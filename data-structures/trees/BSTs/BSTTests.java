@@ -63,7 +63,7 @@ public class BSTTests {
      * Recursively checks whether or not a BST's contents match up with the
      * structure of an expected root. If the trees are not equal, an
      * AssertionError will be thrown.
-     * 
+     *
      * THIS METHOD DOESN'T CHECK THE SIZE OF THE BST.
      *
      * @param expectedRoot The expected root of the BST
