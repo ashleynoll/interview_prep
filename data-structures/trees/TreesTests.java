@@ -75,4 +75,33 @@ public class TreesTests {
 
         assertTrue("Tree should be balanced.", problems.checkBalanced(root));
     }
+
+    @Test(timeout = TIMEOUT)
+    public void testValidateBSTTrue() {
+        root = new TreesProblems.Node<>(1);
+
+        assertTrue("One node is a BST.", problems.validateBST(root));
+
+        assertTrue( "7 node tree should be a BST.", problems.validateBST(problems.minimalTree(new Integer[]{1, 2, 3, 4, 5, 6, 7})));
+
+        root = new TreesProblems.Node<>(3, new TreesProblems.Node<>(2, new TreesProblems.Node<>(1), null),
+                new TreesProblems.Node<>(4, null, new TreesProblems.Node<>(5)));
+
+        assertTrue("Should be a BST.", problems.validateBST(root));
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void testValidateBSTFalse() {
+        root = new TreesProblems.Node<>(1, new TreesProblems.Node<>(8), null);
+
+        assertFalse("Should not be a BST.", problems.validateBST(root));
+
+        assertFalse( "Should not be a BST.", problems.validateBST(problems.minimalTree(new Integer[]{1, 2, 1})));
+
+        root = new TreesProblems.Node<>(3, new TreesProblems.Node<>(2, new TreesProblems.Node<>(1), null),
+                new TreesProblems.Node<>(4, null, new TreesProblems.Node<>(1)));
+
+        assertFalse("Should not be a BST.", problems.validateBST(root));
+    }
 }
+
