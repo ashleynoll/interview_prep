@@ -211,4 +211,46 @@ public class TreesProblems {
             bstBuildSequence(next, prefixClone, possClone, allPoss);
         }
     }
+
+    /**
+     * Problem:
+     *
+     * T1 and T2 are two very large binary trees, with T1 much bigger than T2. Create an
+     * algorithm to determine if T2 is a subtree of T1.
+     *
+     * A tree T2 is a subtree of T1 if there exists a node n in T1 such that the subtree
+     * of n is identical to T2. That is, if you cut off the tree at node n, the two trees
+     * would be identical.
+     *
+     * Solution Explanation:
+     *
+     * In this solution, a preorder traversal is used to check if the smaller tree is
+     * contained in the subtree. At every step of the traversal it is checked to see
+     * if the data in the current node from the larger tree is the same as the root
+     * of the smaller tree. If so, the process is continued with its children to see
+     * if the rest of the tree is contained as well.
+     */
+    public <T> boolean isSubtree(Node<T> tree, Node<T> subtree) {
+        if (tree == null || subtree == null) {
+            return false;
+        }
+
+        if (checkTreeEquals(tree, subtree)) {
+            return true;
+        }
+
+        return isSubtree(tree.left, subtree) || isSubtree(tree.right, subtree);
+    }
+
+    private <T> boolean checkTreeEquals(Node<T> tree, Node<T> subtree) {
+        if (tree == null && subtree == null) {
+            return true;
+        } else if (tree == null || subtree == null) {
+            return false;
+        } else if (!tree.data.equals(subtree.data)) {
+            return false;
+        } else {
+            return checkTreeEquals(tree.left, subtree.left) && checkTreeEquals(tree.right, subtree.right);
+        }
+    }
 }

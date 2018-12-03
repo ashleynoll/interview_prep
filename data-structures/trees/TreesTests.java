@@ -150,5 +150,29 @@ public class TreesTests {
             assertArrayEquals("Build sequence should match", expected.remove(0).toArray(), list.toArray());
         }
     }
+
+    @Test(timeout = TIMEOUT)
+    public void testIsSubteeFalse() {
+        root = problems.minimalTree(new Integer[]{ 1, 2, 3});
+
+        assertFalse("Should not be a subtree", problems.isSubtree(root, new TreesProblems.Node<>(4)));
+
+        root = problems.minimalTree(new Integer[]{ 1, 2, 3, 4, 1, 2, 7});
+        TreesProblems.Node<Integer> subtree = problems.minimalTree(new Integer[]{ 1, 2, 8 });
+
+        assertFalse("Should not be a subtree", problems.isSubtree(root, subtree));
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void testIsSubteeTrue() {
+        root = problems.minimalTree(new Integer[]{ 1, 2, 3});
+
+        assertTrue("Should be a subtree", problems.isSubtree(root, new TreesProblems.Node<>(3)));
+
+        root = problems.minimalTree(new Integer[]{ 1, 2, 3, 4, 1, 2, 7});
+        TreesProblems.Node<Integer> subtree = problems.minimalTree(new Integer[]{ 1, 2, 7 });
+
+        assertTrue("Should be a subtree", problems.isSubtree(root, subtree));
+    }
 }
 
