@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TreesProblems {
     public static class Node<T> {
@@ -174,7 +171,18 @@ public class TreesProblems {
      *
      * Solution Explanation:
      *
+     * The link to this solution's origin is included below, but here is an explanation of
+     * how it actually works. At each node we traverse, we are maintaining a list of the
+     * current prefix we are working with (all previously traversed nodes), all of the
+     * possibilities of what could go next in the prefix (children of already visited nodes),
+     * and also a list of all finished possible lists. When we traverse to a node, we add
+     * its value to the running prefix and add its children to the list of possibilities.
+     * If the list of possibilities is empty, this means we've visited every node so
+     * we add the current prefix to our overall list. Otherwise, we iterate through our
+     * list of possibilities and repeat the process with them with a clone of the prefix
+     * and possibilities.
      *
+     * https://codereview.stackexchange.com/questions/108737/print-all-possible-sequences-that-could-have-created-this-bst
      */
     public <T> List<List<T>> bstBuildSequence(Node<T> root) {
         if (root == null) {
@@ -252,5 +260,45 @@ public class TreesProblems {
         } else {
             return checkTreeEquals(tree.left, subtree.left) && checkTreeEquals(tree.right, subtree.right);
         }
+    }
+
+    /**
+     * Problem:
+     *
+     * You are given a binary tree in which each node contains an integer value (which
+     * might be positive or negative). Design an algorithm to count the number of paths
+     * that sum to a given value. The path does not need to start or end at the root or
+     * a leaf, but it must go downwards (traveling only from parent nodes to child nodes).
+     *
+     * Solution Explanation:
+     *
+     *
+     */
+    public int numPathsWithSum(Node<Integer> root, int sum) {
+        if (root == null) {
+            return 0;
+        }
+
+        return numPathsWithSum(root, sum, 0, new HashMap<>());
+    }
+
+    private int numPathsWithSum(Node<Integer> curr, int targetSum, int runningSum, HashMap<Integer, Integer> map) {
+        if (curr == null) {
+            return 0;
+        }
+        runningSum += curr.data;
+
+        int sumTotal = map.getOrDefault(runningSum - targetSum, 0);
+        if (runningSum == targetSum) {
+            sumTotal++;
+        }
+
+        map.put(runningSum, map.getOrDefault(runningSum, 0) + 1);
+
+        sumTotal += numPathsWithSum(curr.left, targetSum, runningSum, map) + numPathsWithSum(curr.right, targetSum, runningSum, map);
+
+        map.put(runningSum, map.getOrDefault(runningSum, 0) - 1);
+
+        return sumTotal;
     }
 }

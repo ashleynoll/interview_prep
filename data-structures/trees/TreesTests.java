@@ -174,5 +174,16 @@ public class TreesTests {
 
         assertTrue("Should be a subtree", problems.isSubtree(root, subtree));
     }
+
+    @Test//(timeout = TIMEOUT)
+    public void testNumPathsWithSum() {
+        root = problems.minimalTree(new Integer[]{ 3, 1, 3 });
+
+        assertEquals("Num paths should match", 2, problems.numPathsWithSum(root, 4));
+
+        root = problems.minimalTree(new Integer[]{ 9, 2, 5, -3, 3, 3, 1, -1, -1 });
+
+        assertEquals("Num paths should match", 3, problems.numPathsWithSum(root, 4));
+    }
 }
 
