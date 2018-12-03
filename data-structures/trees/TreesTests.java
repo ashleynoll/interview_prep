@@ -1,6 +1,10 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class TreesTests {
@@ -14,7 +18,6 @@ public class TreesTests {
     }
 
     private static <T extends Comparable<T>> void assertTreeEquals(TreesProblems.Node<T> expectedRoot, TreesProblems.Node<T> actualRoot) {
-
         if (expectedRoot == null && actualRoot != null) {
             fail("Actual tree has an unexpected node " + "(data = " + actualRoot.data + ")");
         } else if (actualRoot == null && expectedRoot != null) {
@@ -102,6 +105,50 @@ public class TreesTests {
                 new TreesProblems.Node<>(4, null, new TreesProblems.Node<>(1)));
 
         assertFalse("Should not be a BST.", problems.validateBST(root));
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void testFirstCommonAncestorDoesNotExist() {
+        assertNull("Should return null when tree does not exist.", problems.firstCommonAncestor(null, 3, 7));
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void testFirstCommonAncestor() {
+        root = problems.minimalTree(new Integer[]{1, 2, 3, 4, 5, 6, 7});
+
+        assertTreeEquals(new TreesProblems.Node<Integer>(4), problems.firstCommonAncestor(root, 3, 7));
+
+        assertTreeEquals(new TreesProblems.Node<Integer>(2), problems.firstCommonAncestor(root, 1, 3));
+
+        assertTreeEquals(new TreesProblems.Node<Integer>(2), problems.firstCommonAncestor(root, 1, 2));
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void testBSTBuildSequence() {
+        root = problems.minimalTree(new Integer[]{ 1, 2, 3});
+        List<List<Integer>> expected = new ArrayList<>(),
+                            actual = null;
+        expected.add(new ArrayList<>(Arrays.asList( 2, 1, 3 )));
+        expected.add(new ArrayList<>(Arrays.asList( 2, 3, 1 )));
+
+        actual = problems.bstBuildSequence(root);
+
+        for (List<Integer> list : actual) {
+            assertArrayEquals("Build sequence should match", expected.remove(0).toArray(), list.toArray());
+        }
+
+        root = problems.minimalTree(new Integer[]{ 1, 2, 3, 4 });
+        expected.clear();
+
+        expected.add(new ArrayList<>(Arrays.asList( 2, 1, 3, 4 )));
+        expected.add(new ArrayList<>(Arrays.asList( 2, 3, 1, 4 )));
+        expected.add(new ArrayList<>(Arrays.asList( 2, 3, 4, 1 )));
+
+        actual = problems.bstBuildSequence(root);
+
+        for (List<Integer> list : actual) {
+            assertArrayEquals("Build sequence should match", expected.remove(0).toArray(), list.toArray());
+        }
     }
 }
 
