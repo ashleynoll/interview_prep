@@ -175,7 +175,7 @@ public class TreesTests {
         assertTrue("Should be a subtree", problems.isSubtree(root, subtree));
     }
 
-    @Test//(timeout = TIMEOUT)
+    @Test(timeout = TIMEOUT)
     public void testNumPathsWithSum() {
         root = problems.minimalTree(new Integer[]{ 3, 1, 3 });
 
