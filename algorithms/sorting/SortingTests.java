@@ -1,7 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertArrayEquals;
 
 public class SortingTests {
@@ -30,14 +29,5 @@ public class SortingTests {
 
         problems.sortAnagrams(s);
         assertArrayEquals("Expected grouped anagrams", expected, s);
-    }
-
-    @Test(timeout = TIMEOUT)
-    public void testFindElement() {
-        arr = new Integer[]{ 15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14 };
-
-        assertEquals("Should find element.", 8, problems.findElement(arr, 5));
-
-        assertEquals("Should not find element.", -1, problems.findElement(arr, 21));
     }
 }
