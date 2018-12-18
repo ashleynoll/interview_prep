@@ -28,4 +28,11 @@ public class StringSearchingTests {
 
         assertEquals("Should find correct index.", 4, problems.findInListy(listy, 5));
     }
+
+    @Test(timeout = TIMEOUT)
+    public void testFindStringWithEmptyStrings() {
+        String[] arr = new String[]{ "", "", "", "", "b", "c", "", "", "d", "", "" };
+
+        assertEquals("Should find b's index", 4, problems.findStringWithEmptyStrings(arr, "b"));
+    }
 }

@@ -58,7 +58,7 @@ public class StringSearchingProblems {
             return findStart(arr, mid + 1, end);
         }
     }
-    
+
     /**
      * Problem:
      *
@@ -120,6 +120,64 @@ public class StringSearchingProblems {
                 return -1;
             }
             return arr[i];
+        }
+    }
+
+    /**
+     * Problem:
+     *
+     * Given a sorted array of strings that is interspersed with empty strings,
+     * write a method to find the location of a given string.
+     *
+     * Solution Explanation:
+     *
+     * This is another problem that can be solved with a variation of binary search.
+     * Since not all entries will be able to help us narrow down the list, though,
+     * when we encounter an empty string we will have to search for the next non-empty
+     * string to be able to continue.
+     */
+    public int findStringWithEmptyStrings(String[] arr, String data) {
+        if (arr == null) {
+            return -1;
+        }
+
+        return binarySearchWithEmptyStrings(arr, data, 0, arr.length);
+    }
+
+    private int binarySearchWithEmptyStrings(String[] arr, String data, int start, int end) {
+        if (start >= end) {
+            return arr[start].equals(data) ? start : -1;
+        }
+
+        int mid = (end - start) / 2 + start;
+
+        if (arr[mid].equals("")) {
+            int left = mid - 1,
+                    right = mid + 1;
+            while (left >= start && arr[left].equals("") && right < end && arr[right].equals("")) {
+                if (left - 1 < start && right + 1 > end - 1) {
+                    return -1;
+                }
+                if (left >= start) {
+                    left--;
+                }
+                if (right <= end - 1) {
+                    right++;
+                }
+            }
+            if (!arr[left].equals("")) {
+                mid = left;
+            } else {
+                mid = right;
+            }
+        }
+
+        if (arr[mid].equals(data)) {
+            return mid;
+        } else if (arr[mid].compareTo(data) > 0) {
+            return binarySearchWithEmptyStrings(arr, data, start, mid);
+        } else {
+            return binarySearchWithEmptyStrings(arr, data, mid + 1, end);
         }
     }
 }
