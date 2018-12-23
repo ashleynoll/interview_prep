@@ -35,4 +35,24 @@ public class StringSearchingTests {
 
         assertEquals("Should find b's index", 4, problems.findStringWithEmptyStrings(arr, "b"));
     }
+
+    @Test(timeout = TIMEOUT)
+    public void testRankTracker() {
+        StringSearchingProblems.RankTracker<Integer> tracker = new StringSearchingProblems.RankTracker<>();
+
+        tracker.track(5);
+        tracker.track(10);
+        tracker.track(15);
+        tracker.track(20);
+        tracker.track(1);
+        tracker.track(4);
+
+        assertEquals("Rank should match", 0, tracker.getRank(1));
+        assertEquals("Rank should match", 1, tracker.getRank(4));
+        assertEquals("Rank should match", 2, tracker.getRank(5));
+        assertEquals("Rank should match", 3, tracker.getRank(10));
+        assertEquals("Rank should match", 4, tracker.getRank(15));
+        assertEquals("Rank should match", 5, tracker.getRank(20));
+        assertEquals("Rank should match", -1, tracker.getRank(35));
+    }
 }

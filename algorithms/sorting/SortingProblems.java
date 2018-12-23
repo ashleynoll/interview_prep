@@ -77,4 +77,49 @@ public class SortingProblems {
             }
         }
     }
+
+    /**
+     * Problem:
+     *
+     * In an array of integers, a "peak" is an element which is greater than or
+     * equal to the adjacent integers and a "valley" is an element which is less
+     * than or equal to the adjacent integers. Given an array of integers, sort
+     * the array into an alternating sequence of peaks and valleys.
+     *
+     * Solution:
+     *
+     * To solve this, we'll go through and create the peaks by looking at the
+     * surrounding elements. As long as the peaks are in place, the other
+     * elements must be the valleys. Therefore, we'll go to every other element and make
+     * it a peak by finding the max element in the subarray of three and placing it in
+     * the middle.
+     */
+    public <T extends Comparable<? super T>> void peaksAndValleys(T[] arr) {
+        if (arr == null) {
+            return;
+        }
+
+        for (int i = 0; i < arr.length - 2; i += 2) {
+            int maxIndex = findMax(arr, i, i + 3);
+            swap(arr, maxIndex, i + 1);
+        }
+    }
+
+    private <T extends Comparable<? super T>> int findMax(T[] arr, int start, int end) {
+        T max = arr[start];
+        int maxIndex = start;
+        for (int i = start + 1; i < end; i++) {
+            boolean isLarger = arr[i].compareTo(max) > 0;
+            max = isLarger ? arr[i] : max;
+            maxIndex = isLarger ? i : maxIndex;
+        }
+
+        return maxIndex;
+    }
+
+    private <T> void swap(T[] arr, int i, int j) {
+        T temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
 }

@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.Random;
+
 public class StringSearchingProblems {
     /**
      * Problem:
@@ -178,6 +181,98 @@ public class StringSearchingProblems {
             return binarySearchWithEmptyStrings(arr, data, start, mid);
         } else {
             return binarySearchWithEmptyStrings(arr, data, mid + 1, end);
+        }
+    }
+
+    /**
+     * Problem:
+     *
+     * Imagine you are reading in a stream of integers. Periodically, you wish to be
+     * able to look up the rank of a number x (the number of values less than or equal to
+     * x). Implement the data structures and algorithms to support these operations. That
+     * is, implement the method track(int x), which is called when each number is generated,
+     * and the method getRankOfNumber(int x) which returns the number of values less
+     * than or equal to x (not including x itself.)
+     *
+     * Solution Explanation:
+     *
+     * We'll want to be able to insert and find elements in O(logn) time optimally.
+     * To do this, we'll utilize a BST. We will store the data and also the number
+     * of children that node has. This can be easily included by incrementing the
+     * count everytime a node is touched when adding. Then, when retrieving the
+     * rank, we'll want to look at the left subtree of everything that we pass to
+     * make sure we include all data that is less than what we're searching for.
+     */
+    public static class RankTracker<T extends Comparable<? super T>> {
+        RankNode<T> root;
+
+        public RankTracker() {}
+
+        public void track(T data) {
+            if (root == null) {
+                root = new RankNode<>(data);
+            } else {
+                root = add(root, data);
+                root.numChildren++;
+            }
+        }
+
+        private RankNode<T> add(RankNode<T> curr, T data) {
+            if (curr == null) {
+                return new RankNode<>(data);
+            }
+
+            if (curr.data.compareTo(data) <= 0) {
+                curr.right = add(curr.right, data);
+                curr.numChildren++;
+                return curr;
+            } else {
+                curr.left = add(curr.left, data);
+                curr.numChildren++;
+                return curr;
+            }
+        }
+
+        public int getRank(T data) {
+            if (data == null || root == null) {
+                return -1;
+            }
+
+            return getRank(root, data);
+        }
+
+        private int getRank(RankNode<T> curr, T data) {
+            if (curr == null) {
+                return -1;
+            }
+
+            if (curr.data.equals(data)) {
+                return curr.left != null ? curr.left.numChildren + 1 : 0;
+            } else if (curr.data.compareTo(data) < 0) {
+                int rank = getRank(curr.right, data);
+                if (rank == -1) {
+                    return -1;
+                }
+                return rank + (curr.left != null ? curr.left.numChildren + 1 : 0) + 1;
+            } else {
+                return getRank(curr.left, data);
+            }
+        }
+    }
+
+    public static class RankNode<T> {
+        RankNode<T> left, right;
+        T data;
+        int numChildren;
+
+        public RankNode(T data) {
+            this(data, null, null);
+        }
+
+        public RankNode(T data, RankNode<T> left, RankNode<T> right) {
+            this.data = data;
+            this.left = left;
+            this.right = right;
         }
     }
 }

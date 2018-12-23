@@ -30,4 +30,14 @@ public class SortingTests {
         problems.sortAnagrams(s);
         assertArrayEquals("Expected grouped anagrams", expected, s);
     }
+
+    @Test(timeout = TIMEOUT)
+    public void testPeaksAndValleys() {
+        arr = new Integer[] { 4, 3, 1, 2, 5 };
+        Integer[] expected = new Integer[]{ 3, 4, 1, 5, 2 };
+
+        problems.peaksAndValleys(arr);
+
+        assertArrayEquals("Should give array with alternating peaks and valleys.", expected, arr);
+    }
 }
