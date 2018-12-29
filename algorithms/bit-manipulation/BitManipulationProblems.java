@@ -205,4 +205,20 @@ public class BitManipulationProblems {
 
         return count;
     }
+
+    /**
+     * Problem:
+     *
+     * Write a program to swap odd and even bits in an integer with
+     * as few instructions as possible.
+     *
+     * Solution Explanation:
+     *
+     * We will use a mask of 1010... of 0xA... to isolate the even and odd
+     * numbers. Once these are found, we can simply shift them left/right
+     * by one and OR them together to find the swapped outcome.
+     */
+    public int swapOddAndEvenBits(int a) {
+        return ((a & 0xAAAAAAAA) >>> 1) | ((a & (0xAAAAAAAA >> 1)) << 1);
+    }
 }

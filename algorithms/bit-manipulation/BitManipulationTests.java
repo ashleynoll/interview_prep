@@ -54,4 +54,10 @@ public class BitManipulationTests {
 
         assertEquals("Should find correct number of bits to flip.", 0, problems.numberFlippedBitsToConvert(45, 45));
     }
+
+    @Test(timeout = TIMEOUT)
+    public void testSwapOddAndEvenBits() {
+        assertEquals("Should swap bits.", Integer.parseInt("11101001", 2),
+                problems.swapOddAndEvenBits(Integer.parseInt("11010110", 2)));
+    }
 }
